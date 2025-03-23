@@ -1,0 +1,19 @@
+proxies:
+  - {
+      name: "backup",
+      type: ss,
+      server: 45.45.45.45,
+      port: "1311",
+      cipher: aes-256-gcm,
+      password: "1234567",
+    }
+proxy-groups:
+  - { name: "cheap-group", type: select, proxies: ["backup"] }
+rules:
+  - "DOMAIN-SUFFIX,grok.com,AllProxies"
+  - "DOMAIN-SUFFIX,x.com,AllProxies"
+  - "DOMAIN-SUFFIX,pump.fun,AllProxies"
+  - "DOMAIN-SUFFIX,registry.npmjs.org,AllProxies"
+  - "DOMAIN-SUFFIX,tailwindcss.com,AllProxies"
+  - "DOMAIN-KEYWORD,missav,cheap-group"
+  - "DOMAIN-KEYWORD,youtube,cheap-group"
